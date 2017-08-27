@@ -1,0 +1,181 @@
+doctype html
+html(lang='en')
+  head
+    title FYP #{' - ' + page_title}
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', href='/css/fullcalendar.css')
+    link(rel='stylesheet', href='/css/matrix-style.css')
+    link(rel='stylesheet', href='/css/matrix-media.css')
+    link(href='/font-awesome/css/font-awesome.css', rel='stylesheet')
+    link(rel='stylesheet', href='/css/jquery.gritter.css')
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800', rel='stylesheet', type='text/css')
+    block reference
+
+    script(src='js/excanvas.min.js')
+    script(src='js/jquery.min.js')
+    script(src='js/jquery.ui.custom.js')
+    script(src='js/bootstrap.min.js')
+    //script(src='js/jquery.flot.min.js')
+    //script(src='js/jquery.flot.resize.min.js')
+    script(src='js/jquery.peity.min.js')
+    script(src='js/fullcalendar.min.js')
+    script(src='js/matrix.js')
+    //script(src='js/matrix.dashboard.js')
+    script(src='js/jquery.gritter.min.js')
+    //script(src='js/matrix.interface.js')
+    script(src='js/matrix.chat.js')
+    script(src='js/jquery.validate.js')
+    script(src='js/matrix.form_validation.js')
+    script(src='js/jquery.wizard.js')
+    script(src='js/jquery.uniform.js')
+    script(src='js/select2.min.js')
+    script(src='js/matrix.popover.js')
+    script(src='js/jquery.dataTables.min.js')
+    script(src='js/matrix.tables.js')
+    script(type='text/javascript').
+      // This function is called from the pop-up menus to transfer to
+      // a different page. Ignore if the value returned is a null string:
+      function goPage (newURL) {
+      // if url is empty, skip the menu dividers and reset the menu selection to default
+      if (newURL != "") {
+      // if url is "-", it is this page -- reset the menu:
+      if (newURL == "-" ) {
+      resetMenu();
+      }
+      // else, send page to designated URL
+      else {
+      document.location.href = newURL;
+      }
+      }
+      }
+      // resets the menu selection upon entry to this page:
+      function resetMenu() {
+      document.gomenu.selector.selectedIndex = 2;
+      }
+    block script
+
+  body
+    // Header-part
+    #header
+      h1 Matrix Admin
+    // close-Header-part
+    // top-Header-menu
+    #user-nav.navbar.navbar-inverse
+      ul.nav
+        li#profile-messages.dropdown
+          a.dropdown-toggle(title='', href='#', data-toggle='dropdown', data-target='#profile-messages')
+            i.icon.icon-user
+            span.text Welcome User
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#')
+                i.icon-user
+                |  My Profile
+            li.divider
+            li
+              a(href='#')
+                i.icon-check
+                |  My Tasks
+            li.divider
+            li
+              a(href='login.html')
+                i.icon-key
+                |  Log Out
+        li#menu-messages.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown', data-target='#menu-messages')
+            i.icon.icon-envelope
+            span.text Messages
+            span.label.label-important 5
+            b.caret
+          ul.dropdown-menu
+            li
+              a.sAdd(title='', href='#')
+                i.icon-plus
+                |  new message
+            li.divider
+            li
+              a.sInbox(title='', href='#')
+                i.icon-envelope
+                |  inbox
+            li.divider
+            li
+              a.sOutbox(title='', href='#')
+                i.icon-arrow-up
+                |  outbox
+            li.divider
+            li
+              a.sTrash(title='', href='#')
+                i.icon-trash
+                |  trash
+        li
+          a(title='', href='#')
+            i.icon.icon-cog
+            span.text Settings
+        li
+          a(title='', href='login.html')
+            i.icon.icon-share-alt
+            span.text Logout
+    // close-top-Header-menu
+    // start-top-serch
+    #sidebar
+      a.visible-phone(href='/')
+        i.icon.icon-home
+        |  Dashboard
+      ul
+        if (cat1_title == "Dashboard")
+          li.active
+            a(href='/')
+              i.icon.icon-home
+              span Dashboard
+        else
+          li
+            a(href='/')
+              i.icon.icon-home
+              span Dashboard
+        if (cat1_title == "Wheel")
+          li.submenu.active
+            a(href='/')
+              i.icon.icon-truck
+              span Wheel
+            ul
+              li
+                a(href='wheel_setting') Setting
+              li
+                a(href='form-validation.html') Record
+        else
+          li.submenu
+            a(href='/')
+              i.icon.icon-truck
+              span Wheel
+            ul
+              li
+                a(href='wheel_setting') Setting
+              li
+                a(href='form-validation.html') Record
+    // sidebar-menu
+    // main-container-part
+    #content
+      // breadcrumbs
+      #content-header
+        #breadcrumb
+          a.tip-bottom(href='/', title='Go to Home')
+            i.icon-home
+            |  Home
+          if (cat1_title)
+            a #{cat1_title}
+          if (cat2_title)
+            a #{cat2_title}
+          if (cat3_title)
+            a #{cat3_title}
+      // End-breadcrumbs
+      block content
+    // Footer-part
+    .row-fluid
+      #footer.span12
+        | 2013 © Matrix Admin. Brought to you by 
+        a(href='http://themedesigner.in') Themedesigner.in
+    // end-Footer-part

@@ -1,0 +1,51 @@
+extends layout
+
+block reference
+
+block script
+  script(src='js/wheel_setting.js')
+
+block content
+  .container-fluid
+    .row-fluid
+      .span12
+        .widget-box
+          .widget-title
+            span.icon
+              i.icon-cogs
+            h5
+              | Wheel Manager
+          .widget-content
+            img(src='img/gallery/imgbox4.jpg', alt='')
+            .row-fluid
+            hr    
+            .span6.btn-icon-pg
+              if (action=="auto")
+                button.btn.btn-primary.btn-large.active(id="auto") Auto On
+              else
+                button.btn.btn-primary.btn-large(id="auto") Auto On
+            .span5.btn-icon-pg
+              if (action!="auto")
+                .panel
+                  button.btn.btn-info.btn-large
+                    i.icon-undo
+                  button.btn.btn-primary.btn-large
+                    i.icon-arrow-up  
+                  button.btn.btn-info.btn-large
+                    i.icon-repeat
+                  br
+                  button.btn.btn-primary.btn-large
+                    i.icon-arrow-left
+                  button.btn.btn-primary.btn-large
+                    i.icon-stop
+                  button.btn.btn-primary.btn-large
+                    i.icon-arrow-right
+                  br
+                  button.btn.btn-info.btn-large
+                    i.icon-camera 
+                  button.btn.btn-primary.btn-large
+                    i.icon-arrow-down  
+                  button.btn.btn-info.btn-large
+                    i.icon-volume-up
+                  br
+            .row-fluid
