@@ -23,9 +23,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //USING MODULE
 var index = require('./routes/index');
 var wheel_setting = require('./routes/wheel_setting');
+var map_upload = require('./routes/map_upload');
 //ROUTING
 app.use('/', index);
 app.use('/wheel_setting', wheel_setting);
+app.use('/map_upload', map_upload);
 //======================
 
 // catch 404 and forward to error handler
