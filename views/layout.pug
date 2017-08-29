@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title FYP #{' - ' + page_title}
+    title Intelligent Security Robot Security Control Panel #{' - ' + page_title}
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='/css/bootstrap.min.css')
@@ -124,18 +124,52 @@ html(lang='en')
     #sidebar
       a.visible-phone(href='/')
         i.icon.icon-home
-        |  Dashboard
+        |  Home
       ul
-        if (cat1_title == "Dashboard")
+        if (cat1_title == "Home")
           li.active
             a(href='/')
               i.icon.icon-home
-              span Dashboard
+              span Home
         else
           li
             a(href='/')
               i.icon.icon-home
-              span Dashboard
+              span Home
+
+        if (cat1_title == "Log record")
+          li.active
+            a(href='log_record')
+              i.icon.icon-eye-open
+              span Log record
+        else
+          li
+            a(href='log_record')
+              i.icon.icon-eye-open
+              span Log record
+
+
+        if (cat1_title == "Authorized list")
+          li.submenu.active
+            a(href='/')
+              i.icon.icon-list
+              span Authorized list
+            ul
+              li
+                a(href='authorized') Person
+              li
+                a(href='new') Add new
+        else
+          li.submenu
+            a(href='/')
+              i.icon.icon-list
+              span Authorized list
+            ul
+              li
+                a(href='authorized') Person
+              li
+                a(href='new') Add new
+
         if (cat1_title == "Wheel")
           li.submenu.active
             a(href='/')
@@ -156,6 +190,8 @@ html(lang='en')
                 a(href='wheel_setting') Setting
               li
                 a(href='form-validation.html') Record
+
+
         if (cat1_title == "Map")
           li.submenu.active
             a(href='/')
