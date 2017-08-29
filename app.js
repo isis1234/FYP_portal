@@ -23,10 +23,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 //USING MODULE
 var index = require('./routes/index');
 var wheel_setting = require('./routes/wheel_setting');
+var log_record = require('./routes/log_record');
+var authorized = require('./routes/authorized');
+var news = require('./routes/news');
+var map_upload = require('./routes/map_upload');
 var map_upload = require('./routes/map_upload');
 //ROUTING
 app.use('/', index);
+app.use('/authorized', authorized);
 app.use('/wheel_setting', wheel_setting);
+app.use('/new', news);
+app.use('/log_record', log_record);
 app.use('/map_upload', map_upload);
 //======================
 
