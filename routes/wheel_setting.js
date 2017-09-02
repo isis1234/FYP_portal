@@ -1,16 +1,63 @@
 var express = require('express');
+var sqlite3 = require('sqlite3').verbose();
+var fs = require('fs');
 var router = express.Router();
+var dbFile = './config/db/FYP';
+var sqlFile = './config/sql/FYP_db.sql';
+var dbExists = fs.existsSync(dbFile);
+var db;
+var result = {};
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('wheel_setting', { 
-    page_title: 'Wheel Setting',
-    
-    cat1_link_path: '/',
-    cat1_title: 'Wheel',
-    cat2_link_path: 'wheel_setting',
-    cat2_title: 'Setting'
-  });
+	//STEP1: If no DB, create DB
+	if(!dbExists){
+	    fs.openSync(dbFile, 'w');
+	}
+	//STEP2: connect DB
+	db = new sqlite3.Database(dbFile);
+	
+	db.serialize(function() {
+		//STEP3: If is the DB < 1KB, create table
+		if(!(fs.statSync(dbFile).size)){
+		    fs.readFileSync(sqlFile).toString().split('\n').forEach(function (sql) {
+			    console.log(sql);
+			    db.run(sql);
+		    }) 
+		}
+
+		//STEP4: run sql query
+		stmt = db.prepare("UPDATE wheel SET mode=?, action=?, last_update=CURRENT_TIMESTAMP");
+		stmt.run("MENU", "s");
+		stmt.finalize();
+
+		//STEP5: read table
+		db.each("SELECT * FROM wheel", function(err, row){
+			if(err){
+				// console.log(err)	
+				result.response_status = 'error';
+				result.response_msg = err;
+			} 
+			result.response_status = 'success';
+			result.response_msg.mode = row.mode;
+			result.response_msg.action = row.action;
+			result.response_msg.last_update = row.last_update;
+		
+		});
+		
+		res.render('wheel_setting', { 
+			page_title: 'Wheel Setting',
+			cat1_link_path: '/',
+			cat1_title: 'Wheel',
+			cat2_link_path: 'wheel_setting',
+			cat2_title: 'Setting',
+
+			response_status: result.response_status,
+			response_msg: result.response_msg
+		})
+	});
+
 });
 
 module.exports = router;

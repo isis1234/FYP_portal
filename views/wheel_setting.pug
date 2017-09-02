@@ -18,14 +18,18 @@ block content
           .widget-content
             img(src='img/gallery/imgbox4.jpg', alt='')
             .row-fluid
-            hr    
+            hr
+            p Current mode: #{response_msg.mode}         
+            p Action: #{response_msg.action}
+            p Time: #{response_msg.last_update}
+            hr
             .span6.btn-icon-pg
-              if (action=="auto")
+              if (response_msg.mode=="AUTO")
                 button.btn.btn-primary.btn-large.active(id="auto") Auto On
               else
                 button.btn.btn-primary.btn-large(id="auto") Auto On
             .span5.btn-icon-pg
-              if (action!="auto")
+              if (response_msg.mode!="AUTO")
                 .panel
                   button.btn.btn-info.btn-large
                     i.icon-undo
