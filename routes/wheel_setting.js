@@ -59,6 +59,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+	// console.log(req.body)
 	//STEP1: If no DB, create DB
 	if(!dbExists){
 	    fs.openSync(dbFile, 'w');
@@ -77,7 +78,7 @@ router.post('/', function(req, res, next) {
 
 		//STEP4: run sql query
 		stmt = db.prepare("UPDATE wheel SET mode=?, action=?, last_update=CURRENT_TIMESTAMP");
-		stmt.run("MENU", "s");
+		stmt.run(req.body.mode, req.body.action);
 		stmt.finalize();
 
 		//STEP4: read table

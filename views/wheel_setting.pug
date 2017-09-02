@@ -24,36 +24,40 @@ block content
             p Time: #{response_msg.last_update}
             hr
             .span6.btn-icon-pg
-              if (response_msg.mode=="AUTO")
-                button.btn.btn-primary.btn-large.active(id="auto") Auto On
-              else
-                button.btn.btn-primary.btn-large(id="auto") Auto On
+              form(action='wheel_setting',method='post')
+                input(type="hidden" name="action" value=response_msg.action)
+                if (response_msg.mode=="AUTO")
+                  button.btn.btn-primary.btn-large.active(value="MENU", id="mode", name="mode") Auto On
+                else
+                  button.btn.btn-primary.btn-large(value="AUTO", id="mode", name="mode") Auto On
             .span5.btn-icon-pg
-              if (response_msg.mode=="AUTO")
-                .panel
-                  button.btn.btn-info.btn-large
-                    i.icon-off
-              else
-                .panel
-                  button.btn.btn-info.btn-large
-                    i.icon-undo
-                  button.btn.btn-primary.btn-large
-                    i.icon-arrow-up  
-                  button.btn.btn-info.btn-large
-                    i.icon-repeat
-                  br
-                  button.btn.btn-primary.btn-large
-                    i.icon-arrow-left
-                  button.btn.btn-primary.btn-large
-                    i.icon-stop
-                  button.btn.btn-primary.btn-large
-                    i.icon-arrow-right
-                  br
-                  button.btn.btn-info.btn-large
-                    i.icon-camera 
-                  button.btn.btn-primary.btn-large
-                    i.icon-arrow-down  
-                  button.btn.btn-info.btn-large
-                    i.icon-volume-up
-                  br
+              form(action="wheel_setting", method="post")
+                input(type="hidden" name="mode" value=response_msg.mode)
+                if (response_msg.mode=="AUTO")
+                  .panel
+                    button.btn.btn-info.btn-large(value=(response_msg.action=="x")?'w':'x', id="action", name="action")
+                      i.icon-off
+                else
+                  .panel
+                    button.btn.btn-info.btn-large(value="o", id="action", name="action")
+                      i.icon-undo
+                    button.btn.btn-primary.btn-large(value="w", id="action", name="action")
+                      i.icon-arrow-up  
+                    button.btn.btn-info.btn-large(value="p", id="action", name="action")
+                      i.icon-repeat
+                    br
+                    button.btn.btn-primary.btn-large(value="a", id="action", name="action")
+                      i.icon-arrow-left
+                    button.btn.btn-primary.btn-large(value="x", id="action", name="action")
+                      i.icon-stop
+                    button.btn.btn-primary.btn-large(value="d", id="action", name="action")
+                      i.icon-arrow-right
+                    br
+                    button.btn.btn-info.btn-large(value="r", id="action", name="action")
+                      i.icon-camera 
+                    button.btn.btn-primary.btn-large(value="s", id="action", name="action")
+                      i.icon-arrow-down  
+                    button.btn.btn-info.btn-large(value="t", id="action", name="action")
+                      i.icon-volume-up
+            br
             .row-fluid
