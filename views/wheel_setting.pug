@@ -29,7 +29,11 @@ block content
               else
                 button.btn.btn-primary.btn-large(id="auto") Auto On
             .span5.btn-icon-pg
-              if (response_msg.mode!="AUTO")
+              if (response_msg.mode=="AUTO")
+                .panel
+                  button.btn.btn-info.btn-large
+                    i.icon-off
+              else
                 .panel
                   button.btn.btn-info.btn-large
                     i.icon-undo
